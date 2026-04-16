@@ -1,0 +1,36 @@
+name: delete
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_name:
+        description: 'Package name'
+        required: true
+        type: string
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run action
+        env:
+          PKG_ACTION: DELETE
+          PKG_NAME: ${{ inputs.package_name }}
+        run: |
+          pip install beautifulsoup4
+          python .github/actions.py
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'pkg: delete ${{ inputs.package_name }} from PyPI index'
+          title: 'Delete `${{ inputs.package_name }}` from PyPI index'
+          body: 'Removing `${{ inputs.package_name }}` from the PyPI index.'
+          branch-suffix: random
+          delete-branch: true

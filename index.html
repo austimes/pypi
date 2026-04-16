@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+  <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet" type="text/css"/>
+  <link href="static/index_styles.css" rel="stylesheet"/>
+  <script src="https://code.jquery.com/jquery-latest.min.js">
+  </script>
+  <script src="static/pypi_checker.js" type="text/javascript">
+  </script>
+  <title>
+   PyPI - austimes
+  </title>
+ </head>
+ <body>
+  <div class="container">
+   <section class="header">
+    <br/>
+    <h2 class="title">
+     austimes PyPI
+    </h2>
+   </section>
+   <br/>
+   <p>
+    Private Python package index for the austimes organisation.
+    <br/>
+    Install packages with:
+    <pre><code>pip install &lt;package_name&gt; --extra-index-url https://austimes.github.io/pypi/</code></pre>
+    or with uv:
+    <pre><code>uv add &lt;package_name&gt; --extra-index-url https://austimes.github.io/pypi/</code></pre>
+    <br/>
+    Packages are hosted in private GitHub repositories. Ensure you have run
+    <code>
+     gh auth login
+    </code>
+    and
+    <code>
+     gh auth setup-git
+    </code>
+    for authentication.
+   </p>
+   <hr/>
+   <h6 class="text-header">
+    Packages
+   </h6>
+   <a class="card" href="times-core/">
+    times-core
+    <span>
+    </span>
+    <span class="version">
+     0.2.2
+    </span>
+    <br/>
+    <span class="description">
+     Core data models, GDX parsing and plot configuration for TIMES energy system models
+    </span>
+   </a>
+  </div>
+  <script>
+   $(document).ready(function(){
+      for (let lnk of document.getElementsByTagName('a')) {
+          var content = lnk.textContent.trim().replace(/\s\s+/g, ' ').split(" ");
+          var pkg_name = content[0];
+          var pkg_vers = content[1];
+
+          function mark_red() {
+              lnk.classList.add("redalert");
+          }
+
+          check_supply_chain_attack(pkg_name, pkg_vers, mark_red);
+      }
+  });
+  </script>
+ </body>
+</html>

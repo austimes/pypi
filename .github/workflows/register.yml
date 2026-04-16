@@ -1,0 +1,56 @@
+name: register
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_name:
+        description: 'Package name'
+        required: true
+        type: string
+      version:
+        description: 'Version of the package (tag name)'
+        required: true
+        type: string
+      author:
+        description: 'Author(s) of the package'
+        required: true
+        type: string
+      short_desc:
+        description: 'A short description of the package'
+        required: true
+        type: string
+      homepage:
+        description: 'Homepage of the package (GitHub repository URL)'
+        required: true
+        type: string
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run action
+        env:
+          PKG_ACTION: REGISTER
+          PKG_NAME: ${{ inputs.package_name }}
+          PKG_VERSION: ${{ inputs.version }}
+          PKG_AUTHOR: ${{ inputs.author }}
+          PKG_SHORT_DESC: ${{ inputs.short_desc }}
+          PKG_HOMEPAGE: ${{ inputs.homepage }}
+        run: |
+          pip install beautifulsoup4
+          python .github/actions.py
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'pkg: register ${{ inputs.package_name }} in PyPI index'
+          title: 'Register `${{ inputs.package_name }}` in PyPI index'
+          body: 'Registering `${{ inputs.package_name }}` v${{ inputs.version }} in the PyPI index.'
+          branch-suffix: random
+          delete-branch: true
