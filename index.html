@@ -26,19 +26,43 @@
    <p>
     Private Python package index for the austimes organisation.
     Packages are hosted in private GitHub repositories — you must be an austimes org member with
-    <code>gh auth login</code> and <code>gh auth setup-git</code> configured.
+    <code>
+     gh auth login
+    </code>
+    and
+    <code>
+     gh auth setup-git
+    </code>
+    configured.
    </p>
    <p>
-    <b>Installing with uv (recommended):</b> add to your <code>pyproject.toml</code>:
+    <b>
+     Installing with uv (recommended):
+    </b>
+    add to your
+    <code>
+     pyproject.toml
+    </code>
+    :
     <pre><code>[project]
 dependencies = ["&lt;package_name&gt;"]
 
 [tool.uv.sources]
 &lt;package_name&gt; = { git = "https://github.com/austimes/&lt;package_name&gt;" }</code></pre>
-    Then run <code>uv sync</code>. To pin a specific version use <code>tag = "0.2.2"</code>.
+    Then run
+    <code>
+     uv sync
+    </code>
+    . To pin a specific version use
+    <code>
+     tag = "0.2.2"
+    </code>
+    .
    </p>
    <p>
-    <b>Installing with pip:</b>
+    <b>
+     Installing with pip:
+    </b>
     <pre><code>pip install git+https://github.com/austimes/&lt;package_name&gt;@&lt;tag&gt;</code></pre>
    </p>
    <hr/>
@@ -50,7 +74,7 @@ dependencies = ["&lt;package_name&gt;"]
     <span>
     </span>
     <span class="version">
-     0.2.2
+     0.2.6
     </span>
     <br/>
     <span class="description">
