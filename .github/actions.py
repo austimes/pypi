@@ -85,7 +85,7 @@ def register(pkg_name, version, author, short_desc, homepage):
     template = template.replace("_package_name", pkg_name)
     template = template.replace("_norm_version", norm_version)
     template = template.replace("_version", version)
-    template = template.replace("_link", f"{link}#egg={norm_pkg_name}-{norm_version}")
+    template = template.replace("_link", link)
     template = template.replace("_homepage", homepage)
     template = template.replace("_author", author)
     template = template.replace("_long_description", long_desc)
@@ -135,7 +135,7 @@ def update(pkg_name, version):
         main_version_span = soup.find('span', id='latest-main-version')
         main_version_span.string = version
     anchor.string = norm_version
-    anchor['href'] = f"git+{link}@{version}#egg={norm_pkg_name}-{norm_version}"
+    anchor['href'] = f"git+{link}@{version}"
 
     original_div.insert_after(new_div)
 
