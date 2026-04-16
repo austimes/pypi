@@ -25,21 +25,21 @@
    <br/>
    <p>
     Private Python package index for the austimes organisation.
-    <br/>
-    Install packages with:
-    <pre><code>pip install &lt;package_name&gt; --extra-index-url https://austimes.github.io/pypi/</code></pre>
-    or with uv:
-    <pre><code>uv add &lt;package_name&gt; --extra-index-url https://austimes.github.io/pypi/</code></pre>
-    <br/>
-    Packages are hosted in private GitHub repositories. Ensure you have run
-    <code>
-     gh auth login
-    </code>
-    and
-    <code>
-     gh auth setup-git
-    </code>
-    for authentication.
+    Packages are hosted in private GitHub repositories — you must be an austimes org member with
+    <code>gh auth login</code> and <code>gh auth setup-git</code> configured.
+   </p>
+   <p>
+    <b>Installing with uv (recommended):</b> add to your <code>pyproject.toml</code>:
+    <pre><code>[project]
+dependencies = ["&lt;package_name&gt;"]
+
+[tool.uv.sources]
+&lt;package_name&gt; = { git = "https://github.com/austimes/&lt;package_name&gt;" }</code></pre>
+    Then run <code>uv sync</code>. To pin a specific version use <code>tag = "0.2.2"</code>.
+   </p>
+   <p>
+    <b>Installing with pip:</b>
+    <pre><code>pip install git+https://github.com/austimes/&lt;package_name&gt;@&lt;tag&gt;</code></pre>
    </p>
    <hr/>
    <h6 class="text-header">
